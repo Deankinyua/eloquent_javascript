@@ -1,1 +1,1 @@
-Relearning JavaScript using eloquent JavaScript Book by Marijn Haverbeke
+Relearning JavaScript Concepts using eloquent JavaScript Book by Marijn Haverbeke
