@@ -10,7 +10,7 @@ console.log(counter()); // 1
 console.log(counter()); // 2
 console.log(counter()); // 3
 
-// Creating private functions 
+// Creating private functions
 
 function playerScore() {
   let score = 0;

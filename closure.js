@@ -24,7 +24,7 @@ selling_price = 120;
 
 let new_total_sales = selling_price * 4;
 
-console.log(new_total_sales);
+// console.log(new_total_sales);
 // ? => 480
 
 let a = 4;
@@ -36,6 +36,14 @@ function do_not_change_value(n) {
 let b = do_not_change_value(a);
 
 a = 500;
+
+function multiplier(factor) {
+  return (number) => number / factor;
+}
+
+let twice = multiplier(2);
+console.log(twice(10));
+// → 5
 
 console.log(a);
 console.log(b());
