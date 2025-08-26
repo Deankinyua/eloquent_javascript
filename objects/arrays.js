@@ -1,0 +1,16 @@
+let list = [1, 2, 3, 4];
+
+let person = {
+  name: "Dean Kinyua",
+  age: 22,
+};
+
+console.log(list[0]);
+console.log(person.name);
+console.log(person["age"]);
+
+// Methods
+let sequence = [1, 2, 3];
+sequence.push(4);
+sequence.push(5);
+console.log(sequence);

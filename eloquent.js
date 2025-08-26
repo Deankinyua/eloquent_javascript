@@ -12,7 +12,6 @@ console.log(
 console.log(0 && "Zero is falsy");
 console.log(true || "Return the LHS if it is truthy otherwise return the RHS");
 
-
 // Nested Scope
 const hummus = function (factor) {
   // Ingredient can see factor, but hummus cannot see amount, unit, name
