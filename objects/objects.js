@@ -38,5 +38,29 @@ let object2 = object1;
 object2.value = 10000;
 
 // object2 and object1 point to the same memory location
-console.log(object1);
-console.log(object2);
+// console.log(object1);
+// console.log(object2);
+
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log(target);
+console.log(source);
+
+// * Prevent the original object from being modified using Object.assign
+const staff = {
+  age: 43,
+  Hobbies: ["reading", "Swimming"],
+};
+
+const staff2 = Object.assign({}, staff);
+
+staff2.age = 53;
+staff2.Hobbies = "Copying other people's work";
+
+// * staff will not be changed
+console.log(staff);
+
+console.log(staff2);

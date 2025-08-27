@@ -8,5 +8,6 @@ function addEntry(events, squirrel) {
 }
 
 addEntry(["work", "touched tree", "pizza", "running", "television"], false);
+addEntry(["weekend", "cycling", "break", "peanuts", "beer"], true);
 
 console.log(journal);
