@@ -1,4 +1,4 @@
-import { create, createReportList } from "./module/canvas.js";
+import { create, createReportList } from "canvas";
 import { name, draw, reportArea, reportPerimeter } from "./module/square.js";
 import randomSquare from "./module/square.js";
 

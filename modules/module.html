@@ -8,7 +8,14 @@
         border: 1px solid black;
       }
     </style>
-    <script type="module" src="modules/module.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "canvas": "./module/canvas.js"
+        }
+      }
+    </script>
+    <script type="module" src="module.js"></script>
   </head>
   <body></body>
 </html>

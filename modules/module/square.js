@@ -26,14 +26,13 @@ function createReportList(wrapperId) {
   return list.id;
 }
 
-export const name = "square";
+const name = "square";
 
-export function draw(ctx, length, x, y, color) {
+function draw(ctx, length, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, length, length);
 
   return { length, x, y, color };
 }
 
-
-export { create, createReportList };
+export { name, draw, create, createReportList };
