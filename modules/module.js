@@ -1,3 +1,6 @@
+// * You cannnot use this import statements unless you declared
+// * type="module" in your script
+
 import { create, createReportList } from "canvas";
 import { name, draw, reportArea, reportPerimeter } from "./module/square.js";
 import person from "./module/default.js";
