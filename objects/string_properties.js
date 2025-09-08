@@ -10,3 +10,4 @@ console.log(string.padStart(3, "0"));
 
 let okay = "  okay \n ";
 console.log(okay.trim() + " sir!");
+console.log("coconuts".slice(4, 7));
