@@ -14,6 +14,9 @@ function max(name, ...numbers) {
 }
 console.log(max("Dean", 40, 10, 19, -2));
 
+let words = ["never", "fully", "describe"];
+console.log("Words", "will", ...words, "how much you meant to me.");
+
 let vehicle = {
   windscreen: 1,
   tires: 4,
