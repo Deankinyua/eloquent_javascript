@@ -30,4 +30,11 @@ function journalEvents(journal) {
   return events;
 }
 
+const numbers = [1, 2, 3];
+numbers.forEach((number, index, arr) => {
+  arr[index] = number * 10;
+});
+
+console.log(numbers);
+
 console.log(journalEvents(JOURNAL));
