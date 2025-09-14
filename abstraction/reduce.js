@@ -76,13 +76,9 @@ console.log(
   }),
 );
 
-// Ternary operators in JavaScript
-// ? condition ? expressionIfTrue : expressionIfFalse
-// characterCount(acc) < characterCount(b) ? b : acc
-// Don't confuse ternary operators with Short Circuiting :
 let value = "yes";
-const result = value && "Truthy Value";
+const result = value && "Yes is truthy";
 console.log(result); // Output: Truthy Value
-let new_value = 0;
+let new_value = "";
 const new_result = new_value && "Truthy Value";
-console.log(new_result); // Output: 0
+console.log(new_result); // Output: ''
