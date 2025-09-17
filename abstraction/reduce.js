@@ -22,7 +22,7 @@ const scriptDataset = [
     name: "Coptic",
     ranges: [
       [994, 1008],
-      [11392, 11508],
+      [1192, 11708],
       [11513, 11520],
     ],
     direction: "ltr",
@@ -34,9 +34,9 @@ const scriptDataset = [
   {
     name: "Mongolian",
     ranges: [
-      [994, 1008],
-      [11392, 11508],
-      [11513, 11520],
+      [1005, 1008],
+      [11392, 12508],
+      [11213, 11520],
     ],
     direction: "rtl",
     year: 20,
@@ -47,9 +47,9 @@ const scriptDataset = [
   {
     name: "Latin",
     ranges: [
-      [994, 1008],
-      [11392, 11508],
-      [11513, 11520],
+      [994, 1028],
+      [11310, 11808],
+      [11813, 21520],
     ],
     direction: "rtl",
     year: -100,
@@ -60,6 +60,9 @@ const scriptDataset = [
 
 // Array.reduce takes a callback function with the accumulator as first arg:
 // (acc, currentValue) => {}
+
+// checks the ranges array, starts with first element and subtracts to from from
+// to get the number of characters in each range and then proceeds to reduce all of them
 function characterCount(script) {
   return script.ranges.reduce((count, [from, to]) => {
     return count + (to - from);
@@ -76,9 +79,23 @@ console.log(
   }),
 );
 
-let value = "yes";
-const result = value && "Yes is truthy";
-console.log(result); // Output: Truthy Value
-let new_value = "";
-const new_result = new_value && "Truthy Value";
-console.log(new_result); // Output: ''
+// Finding the average year of origin for dead and living scripts
+function average(array) {
+  return array.reduce((a, b) => a + b) / array.length;
+}
+
+console.log(
+  Math.round(average(scriptDataset.filter((s) => s.living).map((s) => s.year))),
+);
+console.log(
+  Math.round(
+    average(scriptDataset.filter((s) => !s.living).map((s) => s.year)),
+  ),
+);
+
+function countCharacters(array) {
+  array.map((script) => (script.characterCount = characterCount(script)));
+  return array;
+}
+
+console.log(countCharacters(scriptDataset));

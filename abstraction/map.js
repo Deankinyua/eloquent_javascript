@@ -52,6 +52,22 @@ function map(array, transform) {
 }
 
 let rtlScripts = scriptDataset.filter((s) => s.direction == "rtl");
-console.log(map(rtlScripts, (s) => s.name));
+// console.log(map(rtlScripts, (s) => s.name));
 // Built-in map
 console.log(rtlScripts.map((script) => script.name));
+
+// Finds the first script that has a specific character code
+function characterScript(code) {
+  for (let script of scriptDataset) {
+    if (
+      script.ranges.some(([from, to]) => {
+        return code >= from && code < to;
+      })
+    ) {
+      return script;
+    }
+  }
+  return null;
+}
+
+console.log(characterScript(995));
