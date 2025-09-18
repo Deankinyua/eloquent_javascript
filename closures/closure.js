@@ -42,7 +42,7 @@ function multiplier(factor) {
 }
 
 let twice = multiplier(2);
-console.log(twice(10));
+// console.log(twice(10));
 // → 5
 
 console.log(a);
