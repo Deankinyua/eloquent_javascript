@@ -43,8 +43,20 @@ const even = (element) => element % 2 === 0;
 // console.log(array.some(even));
 
 function every2(array, predicate) {
+  // the logical NOT (!) flips true to false and viceversa
   return !array.some((element) => !predicate(element));
 }
+
+// Element = 1
+// predicate(1) → 1 < 10 → true
+// - !predicate(1) → false
+// .some keeps going.
+
+// Element = 30
+// predicate(30) → 30 < 10 → false
+// - !predicate(30) → true
+// .some stops and returns true
+// outer negation flips true to false
 
 let test = (n) => n < 10;
 
