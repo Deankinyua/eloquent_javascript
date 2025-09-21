@@ -45,3 +45,15 @@ console.log(car.description.call(car1, "1000cc", "500kg"));
 // call and apply are the same only that apply takes args as an
 // array while call takes them separately
 console.log(car.description.apply(car2, ["2000cc", "1500kg"]));
+
+function foo() {
+  console.log(this.key);
+}
+
+let objA = { key: "A" };
+
+// * bind returns a function with the context set that can't be changed
+var bindedFoo = foo.bind(objA);
+bindedFoo();
+
+// Just use the bind and call methods to avoid confusion
