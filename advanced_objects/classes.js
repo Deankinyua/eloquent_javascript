@@ -22,7 +22,17 @@ class User {
     this.username = username;
     this.email = email;
   }
+
+  static sayHi() {
+    return "Hello world";
+  }
 }
 
 const user1 = new User("Dean", "kinyuadean@gmail.com");
 console.log(user1);
+// Static methods
+// are not inherited and belong to only the class
+// console.log(user1.sayHi())
+// => sayHi is not a function
+console.log(User.sayHi());
+// You can store general info in static methods e.g handling date and time
