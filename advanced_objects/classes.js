@@ -15,6 +15,13 @@ class Rabbit {
 }
 
 const blackRabbit = new Rabbit("Black");
+// classes are a shorter way of dealing with prototypes
+Rabbit.prototype.teeth = "small";
+console.log(blackRabbit.teeth);
+// methods and properties are stored in the class's prototype
+// in other words a class is a way to create a prototype with certain properties
+// which instantiated objects will inherit
+console.log(Rabbit.prototype.speak());
 console.log(blackRabbit.speak("I like darkness"));
 
 class User {
