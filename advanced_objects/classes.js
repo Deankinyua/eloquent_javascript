@@ -6,11 +6,11 @@
 // and templates that create an object.
 class Rabbit {
   constructor(type) {
+    // anything inside the constructor is stored on the actual object
     this.type = type;
   }
   speak(line) {
-    console.log(`The ${this.type} rabbit says '${line}'`);
-    return 0;
+    return `The ${this.type} rabbit says '${line}'`;
   }
 }
 
@@ -24,6 +24,14 @@ console.log(blackRabbit.teeth);
 console.log(Rabbit.prototype.speak());
 console.log(blackRabbit.speak("I like darkness"));
 
+console.log(Object.hasOwn(blackRabbit, "speak"));
+// false → `speak` is not an "own" property of the instance
+
+console.log(Object.hasOwn(Rabbit.prototype, "speak"));
+
+// → a killer rabbit
+// true => it's in the prototype
+
 class User {
   constructor(username, email) {
     this.username = username;
@@ -36,7 +44,6 @@ class User {
 }
 
 const user1 = new User("Dean", "kinyuadean@gmail.com");
-console.log(user1);
 // Static methods
 // are not inherited and belong to only the class
 // console.log(user1.sayHi())
