@@ -16,6 +16,7 @@ console.log(employee.intro());
 
 class Developer extends Employee {
   constructor(stack, name, salary) {
+    // * super must have attributes of the parent class in the exact order
     super(name, salary);
     this.stack = stack;
   }

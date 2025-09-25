@@ -25,8 +25,9 @@ person[surNameSymbol] = "Doe";
 
 console.log(person.name);
 console.log(person[ageSymbol]);
+// only string keys can be accessed like this not symbols
 console.log(person.ageSymbol);
 
 // Symbols don't make the data truly private, just harder to access
 const personSymbols = Object.getOwnPropertySymbols(person);
-personSymbols.forEach((sym) => console.log(person[sym]));
+// personSymbols.forEach((sym) => console.log(person[sym]));
