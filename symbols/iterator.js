@@ -22,6 +22,22 @@ console.log(arrayIterator.next());
 console.log(arrayIterator.next());
 
 // Iterable Linked list
+
+class ListIterator {
+  constructor(list) {
+    this.list = list;
+  }
+
+  next() {
+    if (this.list == null) {
+      return { done: true };
+    }
+    let value = this.list.value;
+    this.list = this.list.rest;
+    return { value, done: false };
+  }
+}
+
 class List {
   constructor(value, rest) {
     // the value stored at this node
@@ -46,27 +62,28 @@ class List {
   }
 }
 
-class ListIterator {
-  constructor(list) {
-    this.list = list;
-  }
-
-  next() {
-    if (this.list == null) {
-      return { done: true };
-    }
-    let value = this.list.value;
-    this.list = this.list.rest;
-    return { value, done: false };
-  }
-}
-
 List.prototype[Symbol.iterator] = function () {
   return new ListIterator(this);
 };
 
 let list = List.fromArray([1, 2, 3]);
 console.log(list);
-// for (let element of list) {
-//   console.log(element);
-// }
+for (let element of list) {
+  console.log(element);
+}
+
+// extending the List class
+class LengthList extends List {
+  #length;
+
+  constructor(value, rest) {
+    super(value, rest);
+    this.#length = super.length;
+  }
+
+  get length() {
+    return this.#length;
+  }
+}
+
+console.log(LengthList.fromArray([1, 2, 3, 4, 5]).length);
