@@ -17,7 +17,7 @@ const displayName = name || "Guest";
 console.log(displayName); // Output: Guest
 
 // Application of || are not many
-// you can use it to provide default values though
+// you can use it to provide default values though (just like in Elixir)
 const options = {};
 const limit = options.limit || 10;
 console.log(limit); // Output: 10 (default value)

@@ -1,4 +1,4 @@
-globalThis.input = 1;
+globalThis.input = 2;
 
 function square() {
   let cbFn = () => {
