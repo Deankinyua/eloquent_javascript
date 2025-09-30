@@ -78,6 +78,9 @@ class LengthList extends List {
 
   constructor(value, rest) {
     super(value, rest);
+    // When a LengthList node is created, it calls the parent’s length getter (super.length), which computes the recursive length.
+    // That length is stored in #length.
+    // Later, calling .length on a LengthList just returns the cached value, instead of recalculating recursively.
     this.#length = super.length;
   }
 
@@ -85,5 +88,9 @@ class LengthList extends List {
     return this.#length;
   }
 }
+
+// * instanceof method to check if a class was derived from another
+console.log(new LengthList(1, null) instanceof LengthList);
+console.log(new LengthList(2, null) instanceof List);
 
 console.log(LengthList.fromArray([1, 2, 3, 4, 5]).length);
