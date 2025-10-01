@@ -44,4 +44,64 @@ function buildGraph(edges) {
 const roadGraph = buildGraph(roads);
 
 // console.log(roads);
-console.log(roadGraph);
+// console.log(roadGraph);
+// console.log(roadGraph["Alice's House"]);
+
+
+// The aim of the Robot is to carry each package it finds at a place 
+// and move it to a specified location 
+// If that location happens to be the address of the package, the package will be dropped there. 
+// The place value of the package changes with the robot's, but the package's address is never changed.
+
+class VillageState {
+  constructor(place, parcels) {
+    this.place = place;
+    this.parcels = parcels;
+  }
+
+  move(destination) {
+    // if the place we currently are does not have this
+    // destination in its array of destinations
+    // return the current state because it's impossible to move there
+    if (!roadGraph[this.place].includes(destination)) {
+      return this;
+    } else {
+      let parcels = this.parcels
+        .map((p) => {
+          // if a parcel is in the current place, move it to the destination
+          // otherwise leave it as it is
+          if (p.place == this.place) {
+            return { place: destination, address: p.address };
+          }
+          return p;
+        })
+        .filter((p) => p.place != p.address);
+      return new VillageState(destination, parcels);
+    }
+  }
+}
+
+const items = [
+  // Since Groundnuts is at Alice's House it will be picked and moved to Bob's House
+  // The destination for Groundnuts is Bob's House so it will be dropped there
+  {
+    name: "Groundnuts",
+    place: "Alice's House",
+    address: "Bob's House",
+  },
+
+  // Mango is not at Alice's House so it can't be moved
+  // It will be left in the state as its destination is not Bob's House but the farm
+  {
+    name: "Mango",
+    place: "Bob's House",
+    address: "Farm",
+  },
+];
+
+const state = new VillageState("Alice's House", items);
+// console.log(state);
+
+let result = state.move("Bob's House");
+
+console.log(result);

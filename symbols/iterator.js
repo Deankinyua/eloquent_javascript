@@ -50,6 +50,10 @@ class List {
     return 1 + (this.rest ? this.rest.length : 0);
   }
 
+  [Symbol.iterator]() {
+    return new ListIterator(this);
+  }
+
   static fromArray(array) {
     let result = null;
     // Looping from the end of the array, rather than the start
@@ -61,10 +65,6 @@ class List {
     return result;
   }
 }
-
-List.prototype[Symbol.iterator] = function () {
-  return new ListIterator(this);
-};
 
 let list = List.fromArray([1, 2, 3]);
 console.log(list);

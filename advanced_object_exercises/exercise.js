@@ -72,6 +72,7 @@ class Group {
   // Every group iterator must impelement the [Symbol.iterator]() method
 
   [Symbol.iterator]() {
+    // Every iterator method must have a next method that returns an object containing a value and a done property
     return new GroupIterator(this.#members);
   }
 }
