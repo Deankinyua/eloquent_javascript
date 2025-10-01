@@ -47,10 +47,9 @@ const roadGraph = buildGraph(roads);
 // console.log(roadGraph);
 // console.log(roadGraph["Alice's House"]);
 
-
-// The aim of the Robot is to carry each package it finds at a place 
-// and move it to a specified location 
-// If that location happens to be the address of the package, the package will be dropped there. 
+// The aim of the Robot is to carry each package it finds at a place
+// and move it to a specified location
+// If that location happens to be the address of the package, the package will be dropped there.
 // The place value of the package changes with the robot's, but the package's address is never changed.
 
 class VillageState {
@@ -60,9 +59,9 @@ class VillageState {
   }
 
   move(destination) {
-    // if the place we currently are does not have this
-    // destination in its array of destinations
-    // return the current state because it's impossible to move there
+    // if there doesn't exist a road from our current place to the
+    // destination we can't move. Hence return the current state
+    // because it's impossible to move.
     if (!roadGraph[this.place].includes(destination)) {
       return this;
     } else {
@@ -75,6 +74,8 @@ class VillageState {
           }
           return p;
         })
+        // Get rid of all parcel's that have reached their destination
+        // A parcel has reached it's destination if the place is equal to the address
         .filter((p) => p.place != p.address);
       return new VillageState(destination, parcels);
     }
@@ -91,17 +92,32 @@ const items = [
   },
 
   // Mango is not at Alice's House so it can't be moved
-  // It will be left in the state as its destination is not Bob's House but the farm
+  // It will be left in the state as its destination is not Bob's House but the Town Hall
   {
     name: "Mango",
     place: "Bob's House",
-    address: "Farm",
+    address: "Town Hall",
   },
 ];
 
 const state = new VillageState("Alice's House", items);
-// console.log(state);
+console.log(state);
 
-let result = state.move("Bob's House");
+let state_2 = state.move("Bob's House");
+let state_3 = state_2.move("Town Hall");
 
-console.log(result);
+console.log(state_2);
+console.log(state_3);
+
+let first = new VillageState("Post Office", [
+  { place: "Post Office", address: "Alice's House" },
+]);
+let next = first.move("Alice's House");
+
+console.log(next.place);
+// → Alice's House
+console.log(next.parcels);
+// → []
+// Old state is not changed, the move method creates a new state
+console.log(first.place);
+// → Post Office
