@@ -14,27 +14,27 @@ let myVariable = "Miau";
 myVriable = "Woof";
 console.log(myVriable);
 
-function myStrictFunction() {
-  // strict mode can be enable in function blocks or the entire script
-  "use strict";
-  function nested() {
-    return "And so am I!";
-  }
-  return `Hi! I'm a strict mode function! ${nested()}`;
-}
-function myNotStrictFunction() {
-  return "I'm not strict.";
+function addNums(num, num) {
+  console.log(num + num);
 }
 
-console.log(myStrictFunction());
+addNums(4, 6); // 12
+
+function strictAddNums(num, num) {
+  // fails due to use strict
+  "use strict";
+  console.log(num + num);
+}
+
+strictAddNums(1, 7);
 
 // ? The "use strict" directive can only be applied to the body
-// ? of functions with simple parameters. Using "use strict" 
-// ? in functions with rest, default, or destructured parameters is 
+// ? of functions with simple parameters. Using "use strict"
+// ? in functions with rest, default, or destructured parameters is
 // ? a syntax error.
 
 function sum(a = 1, b = 2) {
   // SyntaxError: "use strict" not allowed in function with default parameter
-  "use strict";
+  //   "use strict";
   return a + b;
 }

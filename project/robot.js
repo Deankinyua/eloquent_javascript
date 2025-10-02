@@ -1,51 +1,10 @@
 // A mail-delivery Robot
-// * a road is in the form Source-Destination
-// * e.g the first road is from Alice's House to Bob's House
-const roads = [
-  "Alice's House-Bob's House",
-  "Alice's House-Cabin",
-  "Alice's House-Post Office",
-  "Bob's House-Town Hall",
-  "Daria's House-Ernie's House",
-  "Daria's House-Town Hall",
-  "Ernie's House-Grete's House",
-  "Grete's House-Farm",
-  "Grete's House-Shop",
-  "Marketplace-Farm",
-  "Marketplace-Post Office",
-  "Marketplace-Shop",
-  "Marketplace-Town Hall",
-  "Shop-Town Hall",
-];
 
-function buildGraph(edges) {
-  // Notice how the graph object will not have a prototype
-  let graph = Object.create(null);
-  function addEdge(from, to) {
-    // this check prevents adding identical keys
-    if (from in graph) {
-      graph[from].push(to);
-    } else {
-      // Uses the source as a key and adds the destination to its array value
-      graph[from] = [to];
-    }
-  }
-  // splits each path according to source and destination
-  for (let [from, to] of edges.map((r) => r.split("-"))) {
-    // this call captures all sources and adds them as keys
-    addEdge(from, to);
-    // this call captures all destinations and adds them as keys
-    addEdge(to, from);
-  }
-  return graph;
-}
+import { roadGraph, randomPick, items } from "./robot_2.js";
 
-// Given an array of edges, buildGraph creates a map object that, for each node, stores an array of connected nodes.
-const roadGraph = buildGraph(roads);
-
-// console.log(roads);
-// console.log(roadGraph);
 // console.log(roadGraph["Alice's House"]);
+// * we could use this syntax as well but since we have keys that have spaces between them let's just use the above
+// console.log(roadGraph.Shop);
 
 // The aim of the Robot is to carry each package it finds at a place
 // and move it to a specified location
@@ -82,23 +41,21 @@ class VillageState {
   }
 }
 
-const items = [
-  // Since Groundnuts is at Alice's House it will be picked and moved to Bob's House
-  // The destination for Groundnuts is Bob's House so it will be dropped there
-  {
-    name: "Groundnuts",
-    place: "Alice's House",
-    address: "Bob's House",
-  },
+VillageState.random = function (parcelCount = 5) {
+  let parcels = [];
+  for (let i = 0; i < parcelCount; i++) {
+    let address = randomPick(Object.keys(roadGraph));
+    let place;
+    do {
+      place = randomPick(Object.keys(roadGraph));
+      // if the place is equal to the address it picks another place and does not push identical pairs of place and address.
+    } while (place == address);
+    parcels.push({ place, address });
+  }
+  return new VillageState("Post Office", parcels);
+};
 
-  // Mango is not at Alice's House so it can't be moved
-  // It will be left in the state as its destination is not Bob's House but the Town Hall
-  {
-    name: "Mango",
-    place: "Bob's House",
-    address: "Town Hall",
-  },
-];
+console.log(VillageState.random());
 
 const state = new VillageState("Alice's House", items);
 console.log(state);
