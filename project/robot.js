@@ -1,10 +1,12 @@
 // A mail-delivery Robot
 
-import { roadGraph, randomPick, items } from "./robot_2.js";
-
-// console.log(roadGraph["Alice's House"]);
-// * we could use this syntax as well but since we have keys that have spaces between them let's just use the above
-// console.log(roadGraph.Shop);
+import {
+  roadGraph,
+  randomPick,
+  items,
+  runRobot,
+  randomRobot,
+} from "./robot_2.js";
 
 // The aim of the Robot is to carry each package it finds at a place
 // and move it to a specified location
@@ -41,7 +43,7 @@ class VillageState {
   }
 }
 
-VillageState.random = function (parcelCount = 5) {
+VillageState.random = function (parcelCount = 1) {
   let parcels = [];
   for (let i = 0; i < parcelCount; i++) {
     let address = randomPick(Object.keys(roadGraph));
@@ -54,27 +56,28 @@ VillageState.random = function (parcelCount = 5) {
   }
   return new VillageState("Post Office", parcels);
 };
+let robotState = VillageState.random();
 
-console.log(VillageState.random());
+runRobot(robotState, randomRobot);
 
 const state = new VillageState("Alice's House", items);
-console.log(state);
+// console.log(state);
 
 let state_2 = state.move("Bob's House");
 let state_3 = state_2.move("Town Hall");
 
-console.log(state_2);
-console.log(state_3);
+// console.log(state_2);
+// console.log(state_3);
 
 let first = new VillageState("Post Office", [
   { place: "Post Office", address: "Alice's House" },
 ]);
 let next = first.move("Alice's House");
 
-console.log(next.place);
+// console.log(next.place);
 // → Alice's House
-console.log(next.parcels);
+// console.log(next.parcels);
 // → []
 // Old state is not changed, the move method creates a new state
-console.log(first.place);
+// console.log(first.place);
 // → Post Office

@@ -57,6 +57,12 @@ function buildGraph(edges) {
   return graph;
 }
 
+// state is an instance of VillageState consisting of a place and a list of parcels
+// runRobot will first check if we have any parcels
+// if we don't then it's done with its job
+// Otherwise it will move to a random place
+// If it moved to somewhere where a package is addressed, that package will be dropped there.
+// It does this until there is no package left and at that point state.parcels.length will be 0
 function runRobot(state, robot, memory) {
   for (let turn = 0; ; turn++) {
     if (state.parcels.length == 0) {
@@ -75,6 +81,7 @@ function randomPick(array) {
   return array[choice];
 }
 
+// this will pick a destination from the array of possible destinations
 function randomRobot(state) {
   return { direction: randomPick(roadGraph[state.place]) };
 }
@@ -82,4 +89,4 @@ function randomRobot(state) {
 // Given an array of edges, buildGraph creates a map object that, for each node, stores an array of connected nodes.
 const roadGraph = buildGraph(roads);
 
-export { roadGraph, randomPick, items };
+export { roadGraph, randomPick, items, runRobot, randomRobot };
