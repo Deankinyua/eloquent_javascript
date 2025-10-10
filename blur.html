@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="sampleText" value="Sample Text" /><br /><br />
+    <button type="button">Click me to gain focus</button>
+
+    <script>
+      const textField = document.getElementById("sampleText");
+      const button = document.querySelector("button");
+
+      function focusInput() {
+        // Gain focus
+        textField.focus();
+
+        // The input will lose focus after 3 seconds
+        setTimeout(() => {
+          // the blur method removes focus
+          textField.blur();
+        }, 3000);
+      }
+
+      button.addEventListener("click", focusInput);
+    </script>
+  </body>
+</html>
