@@ -73,7 +73,7 @@ function runRobot(state, robot, memory) {
     let action = robot(state, memory);
     state = state.move(action.direction);
     memory = action.memory;
-    console.log(`Moved to ${action.direction}`);
+    // console.log(`Moved to ${action.direction}`);
   }
 }
 
@@ -82,7 +82,7 @@ function randomPick(array) {
   return array[choice];
 }
 
-// this will pick a destination from the array of possible destinations
+// this is the actual robot, it decides which place to move but in this case it's completely random
 function randomRobot(state) {
   return { direction: randomPick(roadGraph[state.place]) };
 }
