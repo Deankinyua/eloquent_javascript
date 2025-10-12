@@ -6,6 +6,7 @@ import {
   items,
   runRobot,
   randomRobot,
+  routeRobot,
 } from "./robot_2.js";
 
 // The aim of the Robot is to carry each package it finds at a place
@@ -58,6 +59,7 @@ VillageState.random = function (parcelCount = 1) {
 };
 let villageState = VillageState.random();
 runRobot(villageState, randomRobot);
+runRobot(villageState, routeRobot, []);
 
 const state = new VillageState("Alice's House", items);
 // console.log(state);

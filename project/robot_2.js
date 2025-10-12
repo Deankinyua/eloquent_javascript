@@ -35,6 +35,22 @@ const items = [
   },
 ];
 
+const mailRoute = [
+  "Alice's House",
+  "Cabin",
+  "Alice's House",
+  "Bob's House",
+  "Town Hall",
+  "Daria's House",
+  "Ernie's House",
+  "Grete's House",
+  "Shop",
+  "Grete's House",
+  "Farm",
+  "Marketplace",
+  "Post Office",
+];
+
 function buildGraph(edges) {
   // Notice how the graph object will not have a prototype
   let graph = Object.create(null);
@@ -87,7 +103,14 @@ function randomRobot(state) {
   return { direction: randomPick(roadGraph[state.place]) };
 }
 
+function routeRobot(state, memory) {
+  if (memory.length == 0) {
+    memory = mailRoute;
+  }
+  return { direction: memory[0], memory: memory.slice(1) };
+}
+
 // Given an array of edges, buildGraph creates a map object that, for each node, stores an array of connected nodes.
 const roadGraph = buildGraph(roads);
 
-export { roadGraph, randomPick, items, runRobot, randomRobot };
+export { roadGraph, randomPick, items, runRobot, randomRobot, routeRobot };
