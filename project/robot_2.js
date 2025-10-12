@@ -67,6 +67,7 @@ function runRobot(state, robot, memory) {
   for (let turn = 0; ; turn++) {
     if (state.parcels.length == 0) {
       console.log(`Done in ${turn} turns`);
+      // Terminate the loop if there are no parcels
       break;
     }
     let action = robot(state, memory);

@@ -11,3 +11,13 @@ for (let i = 0; i < 10; i++) {
   }
   console.log(`Odd number: ${i}`);
 }
+
+// break and continue can be used with any kind of loop
+let i = 0;
+while (i < 10) {
+  i++;
+  if (i % 3 === 0) {
+    continue; // Skips multiples of 3
+  }
+  console.log(i);
+}

@@ -10,3 +10,21 @@ for (let i = 0; i < 10; i++) {
   }
   console.log(`Now at ${i}`);
 }
+
+const nameArray = [
+  "Joan",
+  "Rose",
+  "Ziporrah",
+  "Veronica",
+  "Mercy",
+  "Eve",
+  "Monica",
+];
+// Let's say we are looking for a specific value from an array:
+for (let i = 0; i < 7; i++) {
+  if (nameArray[i] === "Mercy") {
+    console.log(`We found Mercy at index ${i} exiting ...`);
+    break;
+  }
+  console.log(`This is ${nameArray[i]} not Mercy`);
+}
