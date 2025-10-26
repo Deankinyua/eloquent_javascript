@@ -110,31 +110,72 @@ function routeRobot(state, memory) {
   return { direction: memory[0], memory: memory.slice(1) };
 }
 
-function findRoute(graph, from, to) {
-  let work = [{ at: from, route: [] }];
-  for (let i = 0; i < work.length; i++) {
-    let { at, route } = work[i];
+function goalOrientedRobot({ place, parcels }, route) {
+  if (route.length == 0) {
+    // takes the first undelivered parcel
+    let parcel = parcels[0];
+    // if parcel hasn't been picked up yet, it picks it
+    if (parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+      // if parcel has been picked, it delivers it to destination
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return { direction: route[0], memory: route.slice(1) };
+}
 
-    for (let place of graph[at]) {
-      if (place == to) return route.concat(place);
-      // Once you see !array.some(function), know that we are testing if the condition is false for every element in the array.
-      if (!work.some((w) => w.at == place)) {
-        work.push({ at: place, route: route.concat(place) });
+function findRoute(graph, from, to) {
+  let visited = [];
+  let placeAndPath = {
+    at: from,
+    path: [from],
+  };
+  let queue = [placeAndPath];
+
+  while (queue.length >= 1) {
+    let { at, path } = queue.shift();
+
+    if (!visited.includes(at)) {
+      visited.push(at);
+
+      if (at == to) {
+        return path;
+      }
+
+      let neighbours = graph[at];
+
+      if (neighbours.length == 0) {
+        console.log(`${node} doesn't have any neighbours`);
+      } else {
+        for (let neighbour of neighbours) {
+          if (!visited.includes(neighbour)) {
+            let pathToNeighbour = path.concat([neighbour]);
+
+            let neighbourAndPath = {
+              at: neighbour,
+              path: pathToNeighbour,
+            };
+            queue.push(neighbourAndPath);
+          } else {
+            console.log(`${neighbour} already visited`);
+          }
+        }
       }
     }
   }
 }
 
-// work = [
-//   { at: "Bob's House", route: [] },
-//   { at: "Alice's House", route: ["Alice's House"] },
-//   { at: "Town Hall", route: ["Alice's House", "Town Hall"] },
-// ];
-
 // Given an array of edges, buildGraph creates a map object that, for each node, stores an array of connected nodes.
 const roadGraph = buildGraph(roads);
-// console.log(`The places are ${roadGraph["Town Hall"]}`);
 const shortestRoute = findRoute(roadGraph, "Bob's House", "Marketplace");
-console.log(shortestRoute);
 
-export { roadGraph, randomPick, items, runRobot, randomRobot, routeRobot };
+export {
+  roadGraph,
+  randomPick,
+  items,
+  runRobot,
+  randomRobot,
+  routeRobot,
+  goalOrientedRobot,
+};

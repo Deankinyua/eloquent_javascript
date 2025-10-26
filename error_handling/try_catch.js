@@ -6,6 +6,7 @@ function divideNumbers(a, b) {
   try {
     if (b === 0) {
       const err = new Error("Division by zero is not allowed.");
+      // throw the error which will be caught by the try catch.
       throw err;
     }
     const result = a / b;
