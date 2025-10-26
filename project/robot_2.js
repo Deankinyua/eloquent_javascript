@@ -59,7 +59,7 @@ function buildGraph(edges) {
     if (from in graph) {
       graph[from].push(to);
     } else {
-      // Uses the source as a key and adds the destination to its array value
+      // In the case where the source has not been added yet, add the destination as its first array value
       graph[from] = [to];
     }
   }
@@ -110,7 +110,31 @@ function routeRobot(state, memory) {
   return { direction: memory[0], memory: memory.slice(1) };
 }
 
+function findRoute(graph, from, to) {
+  let work = [{ at: from, route: [] }];
+  for (let i = 0; i < work.length; i++) {
+    let { at, route } = work[i];
+
+    for (let place of graph[at]) {
+      if (place == to) return route.concat(place);
+      // Once you see !array.some(function), know that we are testing if the condition is false for every element in the array.
+      if (!work.some((w) => w.at == place)) {
+        work.push({ at: place, route: route.concat(place) });
+      }
+    }
+  }
+}
+
+// work = [
+//   { at: "Bob's House", route: [] },
+//   { at: "Alice's House", route: ["Alice's House"] },
+//   { at: "Town Hall", route: ["Alice's House", "Town Hall"] },
+// ];
+
 // Given an array of edges, buildGraph creates a map object that, for each node, stores an array of connected nodes.
 const roadGraph = buildGraph(roads);
+// console.log(`The places are ${roadGraph["Town Hall"]}`);
+const shortestRoute = findRoute(roadGraph, "Bob's House", "Marketplace");
+console.log(shortestRoute);
 
 export { roadGraph, randomPick, items, runRobot, randomRobot, routeRobot };

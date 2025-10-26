@@ -58,7 +58,7 @@ VillageState.random = function (parcelCount = 1) {
   return new VillageState("Post Office", parcels);
 };
 let villageState = VillageState.random();
-runRobot(villageState, randomRobot);
+// runRobot(villageState, randomRobot);
 runRobot(villageState, routeRobot, []);
 
 const state = new VillageState("Alice's House", items);
