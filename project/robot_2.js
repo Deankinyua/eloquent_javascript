@@ -115,12 +115,10 @@ function goalOrientedRobot({ place, parcels }, route) {
     // takes the first undelivered parcel
     let parcel = parcels[0];
     // if parcel hasn't been picked up yet, it picks it
-    if (parcel.place != place) {
-      route = findRoute(roadGraph, place, parcel.place);
-      // if parcel has been picked, it delivers it to destination
-    } else {
-      route = findRoute(roadGraph, place, parcel.address);
-    }
+    parcel.place != place
+      ? (route = findRoute(roadGraph, place, parcel.place))
+      : // if parcel has been picked, it delivers it to destination
+        (route = findRoute(roadGraph, place, parcel.address));
   }
   return { direction: route[0], memory: route.slice(1) };
 }
@@ -134,7 +132,8 @@ function findRoute(graph, from, to) {
   let queue = [placeAndPath];
 
   while (queue.length >= 1) {
-    let { at, path } = queue.shift();
+    let { at, path } = queue[0];
+    queue = queue.slice(1, queue.length);
 
     if (!visited.includes(at)) {
       visited.push(at);
