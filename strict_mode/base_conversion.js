@@ -1,4 +1,4 @@
-function convertToBase(number, base) {
+function convertToBase(number, base = 2) {
   let string = "";
   let negative = number > 0 ? false : true;
   number = Math.abs(number);
@@ -21,3 +21,4 @@ function convertToBase(number, base) {
 console.log(convertToBase(40, 8));
 console.log(convertToBase(-16, 8));
 console.log(convertToBase(18, 8));
+console.log(convertToBase(8));
