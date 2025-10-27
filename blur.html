@@ -6,21 +6,29 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" id="sampleText" value="Sample Text" /><br /><br />
+    <textarea name="longtext" id="longone"> </textarea>
+    <input type="textarea" id="sampleText" value="Sample Text" /><br /><br />
     <button type="button">Click me to gain focus</button>
 
     <script>
-      const textField = document.getElementById("sampleText");
+      function increaseHeight(event) {
+        console.log(event);
+        textField.style.height = `${textField.scrollHeight}px`;
+      }
+
+      const textField = document.getElementById("longone");
+      const inputField = document.getElementById("sampleText");
+      textField.addEventListener("input", increaseHeight);
       const button = document.querySelector("button");
 
       function focusInput() {
         // Gain focus
-        textField.focus();
+        inputField.focus();
 
         // The input will lose focus after 3 seconds
         setTimeout(() => {
           // the blur method removes focus
-          textField.blur();
+          inputField.blur();
         }, 3000);
       }
 
