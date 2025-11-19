@@ -8,11 +8,12 @@
   </head>
   <body>
     <div class="segment">
-      <button>Display video</button>
+      <button id="display-video-btn">Display video</button>
 
-      <div class="video-player">
-        <video autoplay>
+      <div class="video-player hidden" id="video-container">
+        <video>
           <source src="./assets/nice.webm" type="video/webm" />
+
           <p>
             Your browser doesn't support HTML video. Here is a
             <a href="rabbit320.mp4">link to the video</a> instead.

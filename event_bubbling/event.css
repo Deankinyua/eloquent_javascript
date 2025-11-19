@@ -19,21 +19,27 @@ button {
   gap: 1rem;
 }
 
+.first-section {
+  border: 1px solid red;
+  width: 50%;
+}
+
 .segment {
   border: 1px solid green;
 }
 
 .video-player {
-  width: 600px;
+  width: 800px;
+  border: 1px solid red;
   max-width: 100%;
 }
 
 .video-player video {
-  width: 100%;
-  object-fit: cover; 
+  display: block;
+  width: 80%;
+  margin: 0 auto;
 }
 
-.first-section {
-  border: 1px solid red;
-  width: 50%;
+.hidden {
+  display: none;
 }
