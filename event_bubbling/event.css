@@ -1,0 +1,39 @@
+body {
+  padding: 100px;
+}
+
+button {
+  width: 30%;
+}
+
+#container,
+#container-2,
+.segment {
+  display: flex;
+  width: 70%;
+  padding: 20px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.segment {
+  border: 1px solid green;
+}
+
+.video-player {
+  width: 600px;
+  max-width: 100%;
+}
+
+.video-player video {
+  width: 100%;
+  object-fit: cover; 
+}
+
+.first-section {
+  border: 1px solid red;
+  width: 50%;
+}
