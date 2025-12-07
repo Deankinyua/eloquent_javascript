@@ -8,7 +8,7 @@ const finalPosition = 700;
 
 const time = {
   start: performance.now(),
-  total: 2000,
+  total: 4000,
 };
 
 const tick = (now) => {

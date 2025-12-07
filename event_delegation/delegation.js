@@ -1,7 +1,7 @@
 // ? to delegate means to - give responsibility to someone or something
 
 // * We can use event bubbling in JS to delegate tasks to parent elements
-// * for example, here we are setting the event handler on the parent of this
+// * for example, here we are setting the event handler on the parent of these
 // * 16 tiles so that it can do the work of changing the color instead
 // * of adding a listener to each element
 
