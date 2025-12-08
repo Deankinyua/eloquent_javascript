@@ -8,7 +8,8 @@ const accounts = {
 
 // This function gets an account from a user and checks whether its a, b or c
 function getAccount() {
-  let accountName = prompt("Enter an account name");
+  // let accountName = prompt("Enter an account name");
+  let accountName = "morgan";
   if (!Object.hasOwn(accounts, accountName)) {
     throw new Error(`No such account: ${accountName}`);
   }
@@ -20,7 +21,9 @@ function getAccount() {
 // * Whether its valid or invalid the from account will already be debited
 function transfer(from, amount) {
   if (accounts[from] < amount) return;
+  console.log(`Account ${from} has the amount ${accounts[from]}`);
   accounts[from] -= amount;
+  console.log(`Account ${from} has the amount ${accounts[from]}`);
   accounts[getAccount()] += amount;
 }
 
@@ -36,7 +39,16 @@ function safeTransfer(from, amount) {
   } finally {
     // * case an exception was thrown, this will reverse the debiting
     if (progress == 1) {
+      console.log(`Progress is ${progress}`);
       accounts[from] += amount;
     }
   }
 }
+
+// try {
+//   transfer("a", 40);
+// } catch (e) {
+//   console.log(e.message);
+// }
+
+safeTransfer("a", 30);

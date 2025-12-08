@@ -11,6 +11,8 @@ function random(number) {
 
 function bgChange() {
   const randomColor = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+  // * use the debugger keyword which will enable you to pause execution and check for the values or different variables
+  // debugger;
   return randomColor;
 }
 
