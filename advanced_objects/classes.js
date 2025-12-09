@@ -4,6 +4,8 @@
 
 // Classes are not objects, they are functions,
 // and templates that create an object.
+
+// This is the common way of defining a class called a class declaration
 class Rabbit {
   constructor(type) {
     // anything inside the constructor is stored on the actual object
