@@ -4,7 +4,8 @@ class Temperature {
   }
   //   returns current value
   get fahrenheit() {
-    return this.celsius * 1.8 + 32;
+    let tempInFarenheit = this.celsius * 1.8 + 32;
+    return `The temperature in Farenheit is ${tempInFarenheit}`;
   }
   //   sets a value as the new value
   set fahrenheit(value) {
