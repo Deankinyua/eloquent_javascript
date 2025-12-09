@@ -28,8 +28,13 @@ function reliableMultiply(a, b) {
 // console.log(reliableMultiply(9, 10));
 
 // The locked box
+// Write a function called withBoxUnlocked that takes a function
+// value as argument, unlocks the box, runs the function, and then
+// ensures that the box is locked again before returning,
+// regardless of whether the argument function returned normally
+// or threw an exception.
 
-const box = new (class {
+class Box {
   locked = true;
   #content = ["uanga"];
 
@@ -47,8 +52,36 @@ const box = new (class {
     if (this.locked) throw new Error("Locked!");
     return this.#content;
   }
-})();
+}
 
+let box = new Box();
+
+// console.log(`The box is ${box.checkStatus()}`);
+// console.log(`The content of the box is ${box.content}`);
+
+function withBoxUnlocked(callback) {
+  let locked = box.locked;
+  if (locked) box.unlock();
+
+  try {
+    return callback();
+  } finally {
+    box.locked = locked;
+  }
+}
+
+const returnValue = withBoxUnlocked(() => box.content.push("gold piece"));
+
+console.log(returnValue);
+
+try {
+  withBoxUnlocked(() => {
+    throw new Error("Pirates on the horizon! Abort!");
+  });
+} catch (e) {
+  console.log("Error raised: " + e);
+}
+
+console.log(box.locked);
 box.unlock();
-console.log(`The box is ${box.checkStatus()}`);
-console.log(`The content of the box is ${box.content}`);
+console.log(box.content);

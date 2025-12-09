@@ -7,6 +7,8 @@ function promptDirection() {
   throw new InputError("Invalid direction: " + result);
 }
 
+// ? Throwing an exception causes the call stack to be unwound until the
+// ? next enclosing try/catch block or until the bottom of the stack.
 for (let i = 0; i < 10; i++) {
   try {
     let dir = promptDirection();
