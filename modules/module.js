@@ -1,6 +1,7 @@
 // * You cannnot use this import statements unless you declared
 // * type="module" in your script
 
+// * canvas was declared as an import map in the HTML
 import { create, createReportList } from "canvas";
 import { name, draw, reportArea, reportPerimeter } from "./module/square.js";
 import person from "./module/default.js";
