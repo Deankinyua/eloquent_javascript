@@ -49,7 +49,9 @@ const user1 = new User("Dean", "kinyuadean@gmail.com");
 // Static methods
 // are not inherited and belong to only the class
 // * Static methods are not associated with any object
-console.log(user1.sayHi())
+// * The Reflect namespace is what brought me back here
+// * All properties and methods of Reflect are static just like the Math object.
+console.log(user1.sayHi());
 // => sayHi is not a function
 console.log(User.sayHi());
 // You can store general info in static methods e.g handling date and time
