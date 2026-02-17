@@ -8,11 +8,16 @@ const adventurer = {
   },
 };
 
+// Here the (?.) operator will check if dog is undefined. If it is then there is no need of
+// looking into the name property just return `undefined`
 const dogName = adventurer.dog?.name;
 console.log(dogName);
-// Expected output: undefined
 
-const catName = adventurer?.cat.name;
+// This will immediately raise an error as the property `dog` is undefined
+// console.log(adventurer.dog.age);
+// Expected output: Program crashes
+
+const catName = adventurer.cat?.name;
 console.log(catName);
 // Expected output: Dinah
 
