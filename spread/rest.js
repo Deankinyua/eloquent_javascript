@@ -3,10 +3,11 @@
 
 // We can pass an indefinite number of parameters to our function
 // Those parameters are available within our function as an array called args
-function mult(...args) {
+function mult(safeword, ...args) {
+  console.log(safeword);
   return args.reduce((acc, currentValue) => acc * currentValue);
 }
 
-let firstMult = mult(4, 3, 9);
+let firstMult = mult("help", 4, 3, 10);
 
 console.log(firstMult);
