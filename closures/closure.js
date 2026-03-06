@@ -48,5 +48,5 @@ let twice = multiplier(2);
 
 console.log(a);
 console.log(b());
-console.log(initial_sales());
 // ? => 400 no matter where we call it initial sales will have closed those values already
+console.log(initial_sales());
