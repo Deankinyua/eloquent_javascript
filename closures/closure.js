@@ -13,18 +13,19 @@
 
 let selling_price = 100;
 
-// Here we are locking the value of selling price
 function sales_at_noon(selling_price) {
   return () => 4 * selling_price;
 }
+
+// Here we are locking the initial_sales
 let initial_sales = sales_at_noon(selling_price);
 
-// changing selling price afterwards won't affect initial results
+// changing selling price afterwards won't affect initial_sales
 selling_price = 120;
 
 let new_total_sales = selling_price * 4;
 
-// console.log(new_total_sales);
+console.log(new_total_sales);
 // ? => 480
 
 let a = 4;
