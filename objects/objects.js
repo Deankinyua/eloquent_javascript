@@ -64,3 +64,18 @@ staff2.Hobbies = "Copying other people's work";
 console.log(staff);
 
 console.log(staff2);
+
+// Multiple source objects and single target object - let's use Object.assign
+// Beauty in black character - Horace
+
+const horace = { name: "Horace", age: 70 };
+const exWife = {
+  exWife: { name: "Olivia", children: [{ name: "Roy" }, { name: "charles" }] },
+};
+const wife = { wife: { name: "Kimmie" } };
+const brother = { brother: { name: "Norman" } };
+
+Object.assign(horace, exWife, wife, brother);
+
+console.log(horace);
+console.log(horace.exWife.children[0].name);
