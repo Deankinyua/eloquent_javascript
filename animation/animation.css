@@ -8,6 +8,14 @@
   justify-content: start;
 }
 
+#rect-svg {
+  border: 1px solid red;
+}
+
+#pause-play {
+  border: 1px solid red;
+}
+
 .ball {
   border-radius: 50%;
 }
