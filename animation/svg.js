@@ -1,5 +1,6 @@
 const playBtn = document.getElementById("pause-play");
-const element = document.querySelector("polygon");
+const polygon_1 = document.getElementById("polygon-1");
+const polygon_2 = document.getElementById("polygon-2");
 
 // progress function, will mostly return a float
 const getProgress = ({ elapsed, total }) => Math.min(elapsed / total, 1);
@@ -11,19 +12,33 @@ const easeInOut = (progress) =>
     : 0.5 * ((progress -= 2) * Math.pow(progress, 4) + 2);
 
 // points
-const shapes = {
-  play: [8, 6, 22, 15, 22, 15, 8, 24],
-  stop: [8, 8, 22, 8, 22, 22, 8, 22],
+const polygon_1_shapes = {
+  pause: [11, 10, 15, 10, 15, 26, 11, 26],
+  play: [11, 10, 11, 18, 11, 18, 11, 26],
+};
+
+const polygon_2_shapes = {
+  pause: [21, 10, 25, 10, 25, 26, 21, 26],
+  play: [11, 10, 28, 18, 28, 18, 11, 26],
 };
 
 // where we should move - from which shape to which
-let isStopped = true;
+let isPaused = true;
 
-const buildShapeTransition = (stoppedStatus) => {
-  const { play, stop } = shapes;
+const buildShapeTransition = (stoppedStatus, shapes) => {
   return stoppedStatus
-    ? { startShape: stop, endShape: play }
-    : { startShape: play, endShape: stop };
+    ? {
+        startShapePolygon_1: polygon_1_shapes.pause,
+        endShapePolygon_1: polygon_1_shapes.play,
+        startShapePolygon_2: polygon_2_shapes.pause,
+        endShapePolygon_2: polygon_2_shapes.play,
+      }
+    : {
+        startShapePolygon_1: polygon_1_shapes.play,
+        endShapePolygon_1: polygon_1_shapes.pause,
+        startShapePolygon_2: polygon_2_shapes.play,
+        endShapePolygon_2: polygon_2_shapes.pause,
+      };
 };
 
 const time = {
@@ -37,20 +52,34 @@ const playOrStop = (now) => {
 
   const progress = getProgress(time);
   const easing = easeInOut(progress);
-  const { play, stop } = shapes;
-  let { startShape, endShape } = buildShapeTransition(isStopped);
 
-  const points = startShape.map((start, index) => {
-    const end = endShape[index];
+  let {
+    startShapePolygon_1,
+    endShapePolygon_1,
+    startShapePolygon_2,
+    endShapePolygon_2,
+  } = buildShapeTransition(isPaused);
+
+  const points_1 = startShapePolygon_1.map((start, index) => {
+    const end = endShapePolygon_1[index];
     const distance = end - start;
     const point = start + easing * distance;
     return point;
   });
 
-  element.setAttribute("points", points.join(" "));
+  const points_2 = startShapePolygon_2.map((start, index) => {
+    const end = endShapePolygon_2[index];
+    const distance = end - start;
+    const point = start + easing * distance;
+    return point;
+  });
+
+  polygon_1.setAttribute("points", points_1.join(" "));
+  polygon_2.setAttribute("points", points_2.join(" "));
+
   if (progress < 1) requestAnimationFrame(playOrStop);
   if (progress >= 1) {
-    isStopped = !isStopped;
+    isPaused = !isPaused;
     time.start = null;
   }
 };
