@@ -2,7 +2,7 @@
   width: 80%;
   margin: 0 auto;
   margin-top: 300px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: start;
@@ -21,9 +21,12 @@
 }
 
 svg {
-  width: 250px;
-  height: 250px;
   color: #5bf;
+  border: 1px solid red;
+}
+
+svg:hover {
+  cursor: pointer;
 }
 
 circle {
