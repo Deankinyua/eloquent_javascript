@@ -2,10 +2,10 @@
   width: 80%;
   margin: 0 auto;
   margin-top: 300px;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 200px;
 }
 
 #rect-svg {
