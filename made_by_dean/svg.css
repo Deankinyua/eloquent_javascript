@@ -24,3 +24,11 @@ circle {
   stroke: white;
   stroke-width: 1.3;
 }
+
+#cartoon-smile {
+  transition: d 0.5s ease-in-out;
+}
+
+#person-cartoon:hover #cartoon-smile {
+  d: path("M 67,72.5 Q 70,75 73,72.5");
+}
