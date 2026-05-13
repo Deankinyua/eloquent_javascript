@@ -26,9 +26,24 @@
     </svg>
 
     <svg id="person-cartoon" viewBox="0 0 200 200">
-      <circle cx="70" cy="70" r="10" />
-      <circle cx="66.5" cy="67.5" r="0.5" fill="white" />
-      <circle cx="73.5" cy="67.5" r="0.5" fill="white" />
+      <filter
+        id="motion-blur"
+        x="-25%"
+        width="150%"
+        color-interpolation-filters="sRGB"
+      >
+        <feGaussianBlur in="SourceGraphic" />
+      </filter>
+
+      <circle
+        id="cartoon-face"
+        cx="180"
+        cy="70"
+        r="10"
+        filter="url(#motion-blur)"
+      />
+      <circle id="eye-1" cx="180" cy="67.5" r="0.5" fill="white" />
+      <circle id="eye-2" cx="180" cy="67.5" r="0.5" fill="white" />
       <path
         id="cartoon-smile"
         d="  

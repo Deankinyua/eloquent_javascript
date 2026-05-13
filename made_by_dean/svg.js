@@ -3,6 +3,80 @@ const line_2 = document.querySelector(".line-2");
 const line_3 = document.querySelector(".line-3");
 const line_4 = document.querySelector(".line-4");
 const line_5 = document.querySelector(".line-5");
+const gaussian = document.querySelector("feGaussianBlur");
+const face = document.getElementById("cartoon-face");
+const eye_1 = document.getElementById("eye-1");
+const eye_2 = document.getElementById("eye-2");
+
+const easeOut = (progress) => Math.pow(--progress, 5) + 1;
+
+const getProgress = ({ elapsed, total }) => Math.min(elapsed / total, 1);
+
+const easeInOut = (progress) =>
+  (progress *= 2) < 1
+    ? 0.5 * Math.pow(progress, 5)
+    : 0.5 * ((progress -= 2) * Math.pow(progress, 4) + 2);
+
+// It seems the vertical centre y will never change
+const getX = (element) => Number(element.getAttribute("cx"));
+
+// Lock the start value of X, haha closures
+const startXValues = [getX(face), getX(eye_1), getX(eye_2)];
+const finalXValues = [70, 66.5, 73.5];
+const animatingOrder = [face, eye_1, eye_2];
+const currentlyAnimatingHeadElementIndex = 0;
+
+// (() => {
+//   animatingOrder.forEach((element) => {
+//     element.classList.add("hidden");
+//   });
+// })();
+
+const deviation = 25;
+
+const blur = (start) => {
+  const time = {
+    start,
+    total: 800,
+  };
+
+  const blurFace = (now) => {
+    time.elapsed = now - time.start;
+    const progress = deviation - deviation * getProgress(time);
+    gaussian.setAttribute("stdDeviation", `${progress}, 0`);
+    if (progress) requestAnimationFrame(blurFace);
+  };
+
+  requestAnimationFrame(blurFace);
+};
+
+const animateCartoonHead = () => {
+  const index = currentlyAnimatingHeadElementIndex;
+  const finalPosition = finalXValues[index];
+  const targetElement = animatingOrder[index];
+  const currentPosition = getX(targetElement);
+  const distance = currentPosition - finalPosition;
+  const startX = startXValues[index]
+
+  const time = {
+    start: performance.now(),
+    total: 700,
+  };
+
+  const animateFace = (now) => {
+    time.elapsed = now - time.start;
+
+    const progress = getProgress(time);
+    const easing = easeOut(progress) * distance;
+    const cx = startX - easing;
+
+    targetElement.setAttribute("cx", cx);
+    if (progress < 1) requestAnimationFrame(animateFace);
+  };
+
+  blur(time.start);
+  requestAnimationFrame(animateFace);
+};
 
 const time = {
   start: performance.now(),
@@ -26,13 +100,6 @@ const line_coordinates = [
 ];
 
 const line_elements = [line_5, line_3, line_1, line_2, line_4, line_5];
-
-const getProgress = ({ elapsed, total }) => Math.min(elapsed / total, 1);
-
-const easeInOut = (progress) =>
-  (progress *= 2) < 1
-    ? 0.5 * Math.pow(progress, 5)
-    : 0.5 * ((progress -= 2) * Math.pow(progress, 4) + 2);
 
 let setAnimationCoordinates = (
   targetElement,
@@ -76,8 +143,10 @@ const showLineAnimations = (now) => {
   } else {
     time.start = null;
     currentlyAnimatingElementIndex += 1;
-    if (currentlyAnimatingElementIndex < 5)
-      requestAnimationFrame(showLineAnimations);
+
+    currentlyAnimatingElementIndex < 5
+      ? requestAnimationFrame(showLineAnimations)
+      : animateCartoonHead();
   }
 };
 
