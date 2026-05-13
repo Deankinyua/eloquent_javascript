@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <svg>
+      <filter
+        id="motion-blur"
+        x="-25%"
+        width="150%"
+        color-interpolation-filters="sRGB"
+      >
+        <feGaussianBlur in="SourceGraphic" />
+      </filter>
+      <circle
+        r="75"
+        cx="100"
+        cy="75"
+        fill="rgb(30, 240, 200)"
+        filter="url(#motion-blur)"
+      />
+    </svg>
+    <script defer src="./index.js"></script>
+  </body>
+</html>
