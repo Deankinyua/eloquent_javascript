@@ -24,13 +24,7 @@ const getX = (element) => Number(element.getAttribute("cx"));
 const startXValues = [getX(face), getX(eye_1), getX(eye_2)];
 const finalXValues = [70, 66.5, 73.5];
 const animatingOrder = [face, eye_1, eye_2];
-const currentlyAnimatingHeadElementIndex = 0;
-
-// (() => {
-//   animatingOrder.forEach((element) => {
-//     element.classList.add("hidden");
-//   });
-// })();
+let currentlyAnimatingHeadElementIndex = 0;
 
 const deviation = 25;
 
@@ -56,7 +50,7 @@ const animateCartoonHead = () => {
   const targetElement = animatingOrder[index];
   const currentPosition = getX(targetElement);
   const distance = currentPosition - finalPosition;
-  const startX = startXValues[index]
+  const startX = startXValues[index];
 
   const time = {
     start: performance.now(),
@@ -71,10 +65,22 @@ const animateCartoonHead = () => {
     const cx = startX - easing;
 
     targetElement.setAttribute("cx", cx);
-    if (progress < 1) requestAnimationFrame(animateFace);
+
+    if (progress < 1) {
+      requestAnimationFrame(animateFace);
+    } else {
+      currentlyAnimatingHeadElementIndex += 1;
+
+      if (currentlyAnimatingHeadElementIndex < 3) {
+        animateCartoonHead();
+      } else {
+        console.log("done");
+      }
+    }
   };
 
-  blur(time.start);
+  if (currentlyAnimatingHeadElementIndex < 1) blur(time.start);
+
   requestAnimationFrame(animateFace);
 };
 

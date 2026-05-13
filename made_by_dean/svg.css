@@ -32,3 +32,7 @@ circle {
 #person-cartoon:hover #cartoon-smile {
   d: path("M 67,72.5 Q 70,75 73,72.5");
 }
+
+#person-cartoon:hover {
+  cursor: pointer;
+}
