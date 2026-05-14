@@ -16,12 +16,12 @@ const easeInOut = (progress) =>
     ? 0.5 * Math.pow(progress, 5)
     : 0.5 * ((progress -= 2) * Math.pow(progress, 4) + 2);
 
-// haha closures
+// Concerned with the head ----------------------
 const startCXValues = [getCX(face), getCX(eye_1), getCX(eye_2)];
-
 const finalCXValues = [70, 66.5, 73.5];
 const headElementsAnimatingOrder = [face, eye_1, eye_2];
 let initialHeadElementIndex = 0;
+// -------------------------------------------
 
 const time = {
   start: performance.now(),
