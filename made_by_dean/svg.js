@@ -21,14 +21,7 @@ const headElementsAnimatingOrder = [face, eye_1, eye_2];
 
 // Concerned with the body------------------------------
 let initialBodyElementIndex = 0;
-const bodyElementsAnimatingOrder = [
-  line_5,
-  line_3,
-  line_1,
-  line_2,
-  line_4,
-  line_5,
-];
+const bodyElementsAnimatingOrder = [line_5, line_3, line_1, line_2, line_4];
 
 let line_1_coordinates = { x1: 70, y1: 80, x2: 70, y2: 105 };
 let line_2_coordinates = { x1: 70, y1: 80, x2: 60, y2: 95 };
