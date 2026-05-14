@@ -1,11 +1,9 @@
-import { getProgress } from "./helpers.js";
+import { getProgress, getCX } from "./helpers.js";
 
 // The functions here animate circles. CX is the cx value of the circle
 const deviation = 25;
 
 const easeOut = (progress) => Math.pow(--progress, 5) + 1;
-
-const getCX = (element) => Number(element.getAttribute("cx"));
 
 // This is the blur
 const blur = (start, gaussian) => {
