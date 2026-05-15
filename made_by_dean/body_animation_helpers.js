@@ -120,8 +120,16 @@ const scaleFace = (
               eye2Animation,
               upperBodyParts,
             );
-          }, 1000)
-        : console.log("nothing");
+          }, 700)
+        : setTimeout(() => {
+            scaleFace(
+              "up",
+              faceAnimation,
+              eye1Animation,
+              eye2Animation,
+              upperBodyParts,
+            );
+          }, 400);
     }
   };
 

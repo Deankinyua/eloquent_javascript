@@ -99,17 +99,13 @@ animateCartoonBody(
   lineCoordinates,
 );
 
-const enlargeFace = () =>
+const animateCartoonFace = () =>
   scaleFace("up", faceAnimation, eye1Animation, eye2Animation, [
     line_1,
     line_2,
     line_4,
   ]);
 
-// wait 6 seconds first
 setTimeout(() => {
-  enlargeFace();
-
-  setInterval(enlargeFace, 5000);
-  // then repeat every 5 seconds
+  animateCartoonFace();
 }, 10000);
