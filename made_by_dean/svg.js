@@ -36,9 +36,10 @@ const faceSize = { small: 10, big: 14 };
 const faceCyValues = { smallCy: 70, bigCy: 52 };
 const faceAnimation = { face, faceCyValues, faceSize };
 
+const eyeSize = 0.5;
 const eyeCyValues = { smallCy: 67.5, bigCy: 49.5 };
-const eye1Animation = { eye_1, eye1CyValues: eyeCyValues };
-const eye2Animation = { eye_2, eye2CyValues: eyeCyValues };
+const eye1Animation = { eye_1, eyeSize, eye1CyValues: eyeCyValues };
+const eye2Animation = { eye_2, eyeSize, eye2CyValues: eyeCyValues };
 
 const lineCoordinates = [
   line_5_coordinates,

@@ -8,6 +8,8 @@ const easeInOut = (progress) =>
     ? 0.5 * Math.pow(progress, 5)
     : 0.5 * ((progress -= 2) * Math.pow(progress, 4) + 2);
 
+const easeOut = (progress) => Math.pow(--progress, 5) + 1;
+
 const getNewCyPoint = (goingUp, circle, circlePositions, easingFunc) => {
   let { finalCy, startCy } = circlePositions;
   let currentCy = getCY(circle);
@@ -17,6 +19,12 @@ const getNewCyPoint = (goingUp, circle, circlePositions, easingFunc) => {
   const newCyPoint = goingUp ? startCy - easing : currentCy + easing;
 
   return newCyPoint;
+};
+
+const closeOrShutEyes = (closing, eyeSize, easingFunc) => {
+  let eyeSizeDifference = eyeSize * easingFunc;
+  let newEyeSize = closing ? eyeSize - difference : eyeSizeDifference;
+  return newEyeSize;
 };
 
 const changeFaceSizeAndPosition = (
@@ -52,6 +60,7 @@ const changeFaceSizeAndPosition = (
 };
 
 export {
+  easeOut,
   easeInOut,
   getProgress,
   getCX,

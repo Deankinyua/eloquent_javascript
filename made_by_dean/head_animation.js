@@ -3,12 +3,13 @@ import {
   getCX,
   changeFaceSizeAndPosition,
   easeInOut,
+  easeOut,
 } from "./helpers.js";
+
+import { animateCartoonEyes } from "./eyes_animation.js";
 
 // The functions here animate circles. CX is the cx value of the circle
 const deviation = 25;
-
-const easeOut = (progress) => Math.pow(--progress, 5) + 1;
 
 // This is the blur
 const blur = (start, gaussian) => {
@@ -76,6 +77,29 @@ const animateCartoonHead = (
   requestAnimationFrame(animateFace);
 };
 
+const blinkEyesThenGoDown = (
+  faceAnimation,
+  eye1Animation,
+  eye2Animation,
+  upperBodyParts,
+) => {
+  const { eye_1, eyeSize } = eye1Animation;
+  const { eye_2 } = eye2Animation;
+  const eyes = [eye_1, eye_2];
+
+  setTimeout(() => {
+    animateFacePeriodically(
+      "down",
+      faceAnimation,
+      eye1Animation,
+      eye2Animation,
+      upperBodyParts,
+    );
+  }, 3500);
+
+  animateCartoonEyes(true, eyes, eyeSize);
+};
+
 const animateFacePeriodically = (
   animationDirection,
   faceAnimation,
@@ -128,15 +152,12 @@ const animateFacePeriodically = (
       requestAnimationFrame(animate);
     } else {
       goingUp
-        ? setTimeout(() => {
-            animateFacePeriodically(
-              "down",
-              faceAnimation,
-              eye1Animation,
-              eye2Animation,
-              upperBodyParts,
-            );
-          }, 700)
+        ? blinkEyesThenGoDown(
+            faceAnimation,
+            eye1Animation,
+            eye2Animation,
+            upperBodyParts,
+          )
         : setTimeout(() => {
             animateFacePeriodically(
               "up",
