@@ -1,4 +1,9 @@
-import { getProgress, getCX } from "./helpers.js";
+import {
+  getProgress,
+  getCX,
+  changeFaceSizeAndPosition,
+  easeInOut,
+} from "./helpers.js";
 
 // The functions here animate circles. CX is the cx value of the circle
 const deviation = 25;
@@ -71,4 +76,80 @@ const animateCartoonHead = (
   requestAnimationFrame(animateFace);
 };
 
-export default animateCartoonHead;
+const animateFacePeriodically = (
+  animationDirection,
+  faceAnimation,
+  eye1Animation,
+  eye2Animation,
+  upperBodyParts,
+) => {
+  let goingUp = animationDirection === "up";
+
+  const {
+    face,
+    faceCyValues: { smallCy, bigCy },
+    faceSize,
+  } = faceAnimation;
+
+  const facePositions = goingUp
+    ? { finalCy: bigCy, startCy: smallCy }
+    : { finalCy: smallCy, startCy: bigCy };
+
+  const { eye_1, eye1CyValues } = eye1Animation;
+  const { eye_2 } = eye2Animation;
+  const eyes = [eye_1, eye_2];
+
+  const eyePositions = goingUp
+    ? { finalCy: eye1CyValues.bigCy, startCy: eye1CyValues.smallCy }
+    : { finalCy: eye1CyValues.smallCy, startCy: eye1CyValues.bigCy };
+
+  const time = {
+    start: performance.now(),
+    total: 700,
+  };
+
+  const animate = (now) => {
+    time.elapsed = now - time.start;
+    const progress = getProgress(time);
+    const easing = easeInOut(progress);
+
+    changeFaceSizeAndPosition(
+      goingUp,
+      face,
+      faceSize,
+      facePositions,
+      eyes,
+      eyePositions,
+      upperBodyParts,
+      easing,
+    );
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      goingUp
+        ? setTimeout(() => {
+            animateFacePeriodically(
+              "down",
+              faceAnimation,
+              eye1Animation,
+              eye2Animation,
+              upperBodyParts,
+            );
+          }, 700)
+        : setTimeout(() => {
+            animateFacePeriodically(
+              "up",
+              faceAnimation,
+              eye1Animation,
+              eye2Animation,
+              upperBodyParts,
+            );
+          }, 2500);
+    }
+  };
+
+  requestAnimationFrame(animate);
+};
+
+export { animateCartoonHead, animateFacePeriodically };
