@@ -62,8 +62,6 @@ const animateCartoonHead = (
           elementsAnimatingOrder,
           startCXValues,
         );
-      } else {
-        console.log("done");
       }
     }
   };

@@ -1,3 +1,5 @@
+import { getProgress, getCY, getLineY1 } from "./helpers.js";
+
 const easeInOut = (progress) =>
   (progress *= 2) < 1
     ? 0.5 * Math.pow(progress, 5)
@@ -21,4 +23,109 @@ let setLineCoordinates = (
   targetElement.setAttribute("y2", `${y_point}`);
 };
 
-export { easeInOut, setLineCoordinates };
+const getNewCyPoint = (goingUp, face, facePositions, easingFunc) => {
+  let { finalCy, startCy } = facePositions;
+  let currentCy = getCY(face);
+
+  const distanceCy = goingUp ? currentCy - finalCy : finalCy - currentCy;
+  const easing = easingFunc * distanceCy;
+  const newCyPoint = goingUp ? startCy - easing : currentCy + easing;
+
+  return newCyPoint;
+};
+
+const setNewRadius = (
+  goingUp,
+  face,
+  faceSizes,
+  facePositions,
+  upperBodyParts,
+  easingFunc,
+) => {
+  let { small, big } = faceSizes;
+
+  let newCyPoint = getNewCyPoint(goingUp, face, facePositions, easingFunc);
+
+  // let finalNeckPosition = goingUp ? 75 : 80;
+  // let currentNeckPosition = getLineY1(neck);
+  // let differenceCY = (finalCY - currentCY) * easingFunc;
+  // let differenceNeck = (finalNeckPosition - currentNeckPosition) * easingFunc;
+
+  let difference = (big - small) * easingFunc;
+
+  let newRadius = goingUp ? small + difference : big - difference;
+
+  // let newCyPoint =
+  //   goingUp
+  //     ? currentCY - difference
+  //     : currentCY + difference;
+
+  let neckPosition = newCyPoint + newRadius;
+
+  face.setAttribute("r", `${newRadius}`);
+  face.setAttribute("cy", `${newCyPoint}`);
+
+  upperBodyParts.forEach((part) => {
+    part.setAttribute("y1", `${neckPosition}`);
+  });
+};
+
+const scaleFace = (
+  animationDirection,
+  faceAnimation,
+  eye1Animation,
+  eye2Animation,
+  upperBodyParts,
+) => {
+  const {
+    face,
+    faceCyValues: { smallCy, bigCy },
+    faceSize,
+  } = faceAnimation;
+
+  let goingUp = animationDirection === "up";
+
+  const facePositions = goingUp
+    ? { finalCy: bigCy, startCy: smallCy }
+    : { finalCy: smallCy, startCy: bigCy };
+
+  const time = {
+    start: performance.now(),
+    total: 1000,
+  };
+
+  const animate = (now) => {
+    time.elapsed = now - time.start;
+    const progress = getProgress(time);
+    const easing = easeInOut(progress);
+
+    setNewRadius(
+      goingUp,
+      face,
+      faceSize,
+      facePositions,
+      upperBodyParts,
+      easing,
+    );
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      goingUp
+        ? setTimeout(() => {
+            scaleFace(
+              "down",
+              faceAnimation,
+              eye1Animation,
+              eye2Animation,
+              upperBodyParts,
+            );
+          }, 1000)
+        : console.log("nothing");
+    }
+  };
+
+  requestAnimationFrame(animate);
+};
+
+export { easeInOut, setLineCoordinates, scaleFace };

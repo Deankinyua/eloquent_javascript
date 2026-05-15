@@ -1,6 +1,10 @@
 import animateCartoonHead from "./head_animation.js";
 import { getProgress, getCX } from "./helpers.js";
-import { easeInOut, setLineCoordinates } from "./body_animation_helpers.js";
+import {
+  easeInOut,
+  setLineCoordinates,
+  scaleFace,
+} from "./body_animation_helpers.js";
 
 const line_1 = document.querySelector(".line-1");
 const line_2 = document.querySelector(".line-2");
@@ -28,6 +32,16 @@ let line_2_coordinates = { x1: 70, y1: 80, x2: 60, y2: 95 };
 let line_3_coordinates = { x1: 70, y1: 105, x2: 60, y2: 120 };
 let line_4_coordinates = { x1: 70, y1: 80, x2: 80, y2: 95 };
 let line_5_coordinates = { x1: 70, y1: 105, x2: 80, y2: 120 };
+
+const faceSize = { small: 10, big: 15 };
+const faceCyValues = { smallCy: 70, bigCy: 50 };
+const eyeCyValues = { smallCy: 67.5, bigCy: 47.5 };
+
+const faceAnimation = { face, faceCyValues, faceSize };
+
+const eye1Animation = { eye_1, eye1CyValues: eyeCyValues };
+
+const eye2Animation = { eye_2, eye1CyValues: eyeCyValues };
 
 const lineCoordinates = [
   line_5_coordinates,
@@ -84,3 +98,18 @@ animateCartoonBody(
   bodyElementsAnimatingOrder,
   lineCoordinates,
 );
+
+const enlargeFace = () =>
+  scaleFace("up", faceAnimation, eye1Animation, eye2Animation, [
+    line_1,
+    line_2,
+    line_4,
+  ]);
+
+// wait 6 seconds first
+setTimeout(() => {
+  enlargeFace();
+
+  setInterval(enlargeFace, 5000);
+  // then repeat every 5 seconds
+}, 10000);
