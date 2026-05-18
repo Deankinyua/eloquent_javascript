@@ -1,5 +1,3 @@
-import { getProgress, getCY, getLineY1 } from "./helpers.js";
-
 let setLineCoordinates = (
   targetElement,
   targetElementCoordinates,

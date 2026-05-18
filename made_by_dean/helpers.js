@@ -21,12 +21,6 @@ const getNewCyPoint = (goingUp, circle, circlePositions, easingFunc) => {
   return newCyPoint;
 };
 
-const closeOrShutEyes = (closing, eyeSize, easingFunc) => {
-  let eyeSizeDifference = eyeSize * easingFunc;
-  let newEyeSize = closing ? eyeSize - difference : eyeSizeDifference;
-  return newEyeSize;
-};
-
 const changeFaceSizeAndPosition = (
   goingUp,
   face,
