@@ -18,3 +18,12 @@ svg {
     stroke-linejoin: round;
   }
 }
+
+section {
+  display: flex;
+  gap: 100px;
+}
+
+svg:hover {
+  cursor: pointer;
+}

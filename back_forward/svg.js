@@ -1,20 +1,14 @@
+import { animateControlButton } from "./back_forward_animation.js";
+
 const backIcon = document.getElementById("back-icon");
+const backTargetPolygon = document.getElementById("back-polygon-2");
+const nextIcon = document.getElementById("next-icon");
+const nextTargetPolygon = document.getElementById("next-polygon-2");
 
-backIcon.addEventListener("mouseenter", () => {
-  console.log("I just entered the fucking element");
+backIcon.addEventListener("click", () => {
+  animateControlButton("back", true, backTargetPolygon);
 });
 
-backIcon.addEventListener("mouseleave", () => {
-  console.log("I just left the fucking element");
+nextIcon.addEventListener("click", () => {
+  animateControlButton("next", true, nextTargetPolygon);
 });
-
-//  <polygon
-//     id="polygon-2"
-//     points="
-//         22, 10
-//         11, 16
-//         11, 20
-//         22, 26
-//       "
-//     fill="white"
-//   />
