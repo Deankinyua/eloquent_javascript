@@ -8,7 +8,7 @@ import {
 const animateControlButton = (buttonType, isStarting, polygon) => {
   const time = {
     start: performance.now(),
-    total: 300,
+    total: 200,
   };
 
   const animatePolygon = (now) => {
