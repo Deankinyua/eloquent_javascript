@@ -1,11 +1,11 @@
 const shapesBackIcon = {
-  start: [26, 10, 14, 18, 14, 18, 26, 26],
-  end: [22, 10, 11, 16, 11, 20, 22, 26],
+  start: [28, 10, 11, 18, 11, 18, 28, 26],
+  end: [22, 10, 8, 15, 8, 21, 22, 26],
 };
 
 const shapesNextIcon = {
-  start: [11, 10, 23, 18, 23, 18, 11, 26],
-  end: [15, 10, 26, 16, 26, 20, 15, 26],
+  start: [8, 10, 25, 18, 25, 18, 8, 26],
+  end: [14, 10, 28, 15, 28, 21, 14, 26],
 };
 
 const getProgress = ({ elapsed, total }) => Math.min(elapsed / total, 1);
